@@ -138,6 +138,7 @@
       <a href="#documents">Document Dependency Model</a>
       <a href="#integration">Integration with Document Platform</a>
       <a href="#visibility">Operational Visibility</a>
+      <a href="#portals">Client & Learner Portals</a>
       <a href="#security">Security & Access</a>
       <a href="#deliverables">Consultant Deliverables</a>
     </nav>
@@ -191,7 +192,8 @@
       <tr>
         <td><strong>Zoho Creator</strong></td>
         <td>
-          Detailed onboarding workflows, forms, operational data, and learner-level records.
+          Detailed onboarding workflows, forms, operational data, learner-level records,
+          client portals, learner portals, and bulk learner management (grouped by client).
         </td>
       </tr>
       <tr>
@@ -339,10 +341,111 @@
   <p class="muted">
     These views are for operations and management, not just sales.
   </p>
+
+  <h3>8.1 Learner management dashboards</h3>
+  <p>
+    The system must support managing large numbers of learners (thousands per client)
+    with high-level status visibility:
+  </p>
+  <ul>
+    <li>
+      <strong>Client-grouped views:</strong> All learners organized by client/company,
+      allowing bulk operations and status rollups at the client level
+    </li>
+    <li>
+      <strong>High-level status dashboard:</strong> Aggregate views showing:
+      <ul>
+        <li>Total learners per client</li>
+        <li>Document completion percentages</li>
+        <li>Exception counts and trends</li>
+        <li>Stage distribution (how many at each lifecycle stage)</li>
+      </ul>
+    </li>
+    <li>
+      <strong>Individual learner management:</strong> Drill-down capability to view
+      and manage documents at the individual learner level, with full document status,
+      exceptions, and history
+    </li>
+    <li>
+      <strong>Bulk operations:</strong> Ability to perform actions across multiple
+      learners (e.g., bulk document requests, status updates, filtering)
+    </li>
+  </ul>
+</section>
+
+<section id="portals">
+  <h2>9. Client and Learner Portals</h2>
+
+  <p>
+    The implementation must provide self-service portals for both clients and learners
+    to reduce manual administrative overhead and improve transparency.
+  </p>
+
+  <h3>9.1 Client portal</h3>
+  <p>
+    A client-facing portal that allows client administrators to:
+  </p>
+  <ul>
+    <li>
+      View high-level status dashboards for their organization showing aggregate
+      learner status, document completion rates, and exception summaries
+    </li>
+    <li>
+      Access learner lists grouped by project/program with filtering and search
+      capabilities
+    </li>
+    <li>
+      View individual learner records and document status
+    </li>
+    <li>
+      Upload documents on behalf of learners (when authorized)
+    </li>
+    <li>
+      Submit bulk learner information and coordinate document collection
+    </li>
+    <li>
+      View exception reports and missing document lists
+    </li>
+    <li>
+      Track progress against SLAs and compliance requirements
+    </li>
+  </ul>
+
+  <h3>9.2 Learner portal</h3>
+  <p>
+    A learner-facing portal that allows individual learners to:
+  </p>
+  <ul>
+    <li>
+      View their personal profile and current status
+    </li>
+    <li>
+      See which documents are required, which have been submitted, and which
+      are pending or rejected
+    </li>
+    <li>
+      Upload documents directly through the portal
+    </li>
+    <li>
+      Receive notifications about missing or expiring documents
+    </li>
+    <li>
+      View document verification status and rejection reasons (where applicable)
+    </li>
+    <li>
+      Access their compliance history and status
+    </li>
+  </ul>
+
+  <div class="callout">
+    <strong>Design principle:</strong><br/>
+    Portals should reduce the need for manual email/phone coordination while
+    maintaining appropriate access controls and data isolation between clients.
+  </div>
 </section>
 
 <section id="security">
-  <h2>9. Security & Access</h2>
+  <h2>10. Security & Access</h2>
 
   <ul>
     <li>Role-based access (Sales, Vetting, Finance, Ops)</li>
@@ -353,7 +456,7 @@
 </section>
 
 <section id="deliverables">
-  <h2>10. Required Consultant Deliverables</h2>
+  <h2>11. Required Consultant Deliverables</h2>
 
   <ol>
     <li>High-level data model (entities and relationships)</li>
