@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>LulaWorx Zoho Implementation Specifications</title>
+    <style>
+      :root {
+        --bg: #0b0f14;
+        --card: #111823;
+        --text: #e7eef7;
+        --muted: #a9b7c9;
+        --line: #233145;
+        --accent: #67b7ff;
+        --accent2: #7ef0c6;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+          Arial, "Helvetica Neue", Helvetica, "Noto Sans", "Apple Color Emoji",
+          "Segoe UI Emoji";
+        background: linear-gradient(180deg, #070a0f 0%, var(--bg) 100%);
+        color: var(--text);
+        line-height: 1.5;
+        min-height: 100vh;
+      }
+      .wrap {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 60px 24px;
+      }
+      header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+      h1 {
+        font-size: 32px;
+        margin: 0 0 12px;
+        font-weight: 700;
+      }
+      .subtitle {
+        color: var(--muted);
+        font-size: 16px;
+        margin: 0;
+      }
+      .docs-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-top: 40px;
+      }
+      @media (min-width: 700px) {
+        .docs-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      .doc-card {
+        background: rgba(17, 24, 35, 0.55);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 28px;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        color: var(--text);
+        display: block;
+      }
+      .doc-card:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(103, 183, 255, 0.1);
+      }
+      .doc-card h2 {
+        margin: 0 0 12px;
+        font-size: 20px;
+        color: var(--accent);
+      }
+      .doc-card p {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+      .doc-card .badge {
+        display: inline-block;
+        font-size: 11px;
+        padding: 4px 10px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--accent2);
+        background: rgba(126, 240, 198, 0.08);
+        margin-top: 8px;
+      }
+      .footer {
+        margin-top: 60px;
+        padding-top: 40px;
+        border-top: 1px solid var(--line);
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="wrap">
+      <header>
+        <h1>Zoho Implementation Specifications</h1>
+        <p class="subtitle">
+          Technical specifications and consultant overview for the LulaWorx Zoho
+          CRM & Zoho Creator implementation
+        </p>
+      </header>
+
+      <div class="docs-grid">
+        <a href="zoho-summary.html" class="doc-card">
+          <h2>Consultant Summary</h2>
+          <p>
+            One-page overview for consultants explaining how Zoho fits into the
+            solution, what it must do well, and how consultants will be assessed.
+          </p>
+          <span class="badge">Start Here</span>
+        </a>
+
+        <a href="zoho-spec.html" class="doc-card">
+          <h2>Full Specification</h2>
+          <p>
+            Complete technical specification including architecture, lifecycle
+            stages, governance controls, forms, integration details, and required
+            deliverables.
+          </p>
+          <span class="badge">Detailed Spec</span>
+        </a>
+      </div>
+
+      <footer>
+        <p>
+          Zoho CRM + Creator = <strong>System of Record</strong><br />
+          Orchestration and governance layer for onboarding and compliance
+          management.
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
+

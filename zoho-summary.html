@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Zoho Implementation – One-Page Consultant Summary</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #0b0f14;
+      color: #e7eef7;
+      line-height: 1.55;
+    }
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    h1 {
+      font-size: 24px;
+      margin: 0 0 10px;
+    }
+    h2 {
+      font-size: 16px;
+      margin: 28px 0 8px;
+      color: #67b7ff;
+    }
+    p {
+      margin: 8px 0;
+    }
+    ul {
+      margin: 8px 0 8px 18px;
+    }
+    li {
+      margin: 6px 0;
+    }
+    .box {
+      background: rgba(17, 24, 35, 0.7);
+      border: 1px solid #233145;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+    .highlight {
+      color: #7ef0c6;
+      font-weight: 600;
+    }
+    .muted {
+      color: #a9b7c9;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <nav style="margin-bottom: 32px; font-size: 14px">
+      <a href="index.html" style="color: #67b7ff; text-decoration: none"
+        >← Back to Overview</a
+      >
+    </nav>
+    <h1>Zoho CRM & Zoho Creator – Implementation Overview</h1>
+    <p class="muted">
+      This summary explains how Zoho is expected to function in the overall solution.
+      Detailed specifications follow separately.
+    </p>
+
+    <div class="box">
+      <p>
+        <span class="highlight">In one sentence:</span><br />
+        Zoho is the orchestration and governance layer that controls lifecycle stages,
+        enforces rules, and provides operational visibility — it is not a document processing engine.
+      </p>
+    </div>
+
+    <h2>The problem we are solving</h2>
+    <p>
+      We manage onboarding and ongoing compliance for organisations with
+      large numbers of individuals (e.g. learners, beneficiaries, contractors),
+      where progression must be tightly controlled.
+    </p>
+    <p>
+      The key challenge is not collecting data — it is ensuring that:
+    </p>
+    <ul>
+      <li>Steps happen in the correct order</li>
+      <li>Mandatory requirements are not bypassed</li>
+      <li>Exceptions are visible, intentional, and auditable</li>
+      <li>Operations teams can see exactly where things are stuck and why</li>
+    </ul>
+
+    <h2>What Zoho must do well</h2>
+    <ul>
+      <li>Act as the <strong>single system of record</strong></li>
+      <li>Model clear lifecycle stages (from first contact to active)</li>
+      <li>Enforce hard gates between stages based on defined rules</li>
+      <li>Coordinate multiple parallel processes (sales, vetting, finance, ops)</li>
+      <li>Provide dashboards for operational and management oversight</li>
+    </ul>
+
+    <h2>What Zoho must NOT do</h2>
+    <ul>
+      <li>Perform OCR or document classification</li>
+      <li>Store large volumes of raw documents</li>
+      <li>Rely on manual stage changes as the norm</li>
+      <li>Hide or silently override missing requirements</li>
+    </ul>
+
+    <h2>How Zoho fits with the document platform</h2>
+    <p>
+      An external document platform handles ingestion, OCR, validation, and exception detection.
+      Zoho consumes the results.
+    </p>
+    <ul>
+      <li>The document platform reports document status and exceptions</li>
+      <li>Zoho decides whether progression is allowed</li>
+      <li>Zoho controls approvals, overrides, and notifications</li>
+    </ul>
+
+    <div class="box">
+      <p>
+        <span class="highlight">Simple rule:</span><br />
+        The document platform tells Zoho <em>what is complete or missing</em>.<br />
+        Zoho decides <em>what is allowed to move forward</em>.
+      </p>
+    </div>
+
+    <h2>What we expect from a Zoho consultant</h2>
+    <ul>
+      <li>A clear data model separating companies, individuals, and processes</li>
+      <li>Well-defined lifecycle stages with enforceable rules</li>
+      <li>Thoughtful use of Zoho CRM vs Zoho Creator (not everything in one place)</li>
+      <li>Clean, vendor-agnostic integration design</li>
+      <li>Documentation that allows the system to be supported long-term</li>
+    </ul>
+
+    <h2>How consultants will be assessed</h2>
+    <p>
+      We are evaluating understanding and design quality more than speed.
+    </p>
+    <ul>
+      <li>Do you understand where Zoho should enforce rules vs defer to integrations?</li>
+      <li>Can you explain how exceptions flow through the system?</li>
+      <li>Can you design for scale without creating operational debt?</li>
+      <li>Can you communicate clearly with non-technical stakeholders?</li>
+    </ul>
+
+    <p class="muted">
+      If your typical approach relies heavily on manual stage changes or loosely governed workflows,
+      this project may not be a good fit.
+    </p>
+  </div>
+</body>
+</html>

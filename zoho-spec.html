@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Spec B — Zoho CRM & Creator Implementation (Vendor Assessment)</title>
+  <style>
+    :root{
+      --bg:#0b0f14;
+      --card:#111823;
+      --text:#e7eef7;
+      --muted:#a9b7c9;
+      --line:#233145;
+      --accent:#67b7ff;
+      --accent2:#7ef0c6;
+      --warn:#ffd166;
+      --good:#4ade80;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica;
+      background:linear-gradient(180deg, #070a0f 0%, var(--bg) 100%);
+      color:var(--text);
+      line-height:1.55;
+    }
+    header{
+      padding:28px 18px 18px;
+      border-bottom:1px solid var(--line);
+      background:rgba(17,24,35,.7);
+      backdrop-filter: blur(10px);
+      position:sticky;
+      top:0;
+      z-index:5;
+    }
+    .wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+    h1{margin:0;font-size:22px;font-weight:700}
+    .subtitle{margin:6px 0 0;color:var(--muted);font-size:14px}
+    .badge{
+      display:inline-block;
+      font-size:12px;
+      padding:4px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      color:var(--accent2);
+      margin-top:10px;
+      background:rgba(126,240,198,.08);
+    }
+    nav{
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    nav a{
+      color:var(--text);
+      text-decoration:none;
+      font-size:12px;
+      padding:6px 10px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:rgba(11,15,20,.6);
+    }
+    nav a:hover{border-color:rgba(103,183,255,.7)}
+    main{padding:22px 0 60px}
+    section{
+      background:rgba(17,24,35,.55);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:18px;
+      margin:14px 0;
+    }
+    h2{margin:0 0 10px;font-size:18px}
+    h3{margin:16px 0 8px;font-size:15px;color:var(--accent)}
+    p{margin:10px 0}
+    ul{margin:10px 0 10px 18px}
+    li{margin:6px 0}
+    .muted{color:var(--muted)}
+    .callout{
+      border-left:4px solid var(--accent);
+      background:rgba(103,183,255,.08);
+      padding:12px 14px;
+      border-radius:10px;
+      margin:12px 0;
+    }
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      border:1px solid var(--line);
+      border-radius:12px;
+      margin:10px 0;
+      overflow:hidden;
+    }
+    th, td{
+      text-align:left;
+      padding:10px 12px;
+      border-bottom:1px solid var(--line);
+      font-size:13px;
+      vertical-align:top;
+    }
+    th{
+      background:rgba(35,49,69,.35);
+      font-weight:650;
+    }
+    tr:last-child td{border-bottom:none}
+    footer{
+      color:var(--muted);
+      font-size:12px;
+      padding:18px 0 30px;
+    }
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+    }
+    @media (min-width: 900px){
+      .two-col{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="wrap">
+    <h1>SPEC B — Zoho CRM & Zoho Creator Implementation</h1>
+    <div class="subtitle">
+      Consultant-facing specification for implementing a governed, scalable lifecycle system using Zoho.
+    </div>
+    <div class="badge">Audience: Integration-aware, non-technical stakeholders</div>
+
+    <nav>
+      <a href="#overview">Overview</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#lifecycle">Lifecycle & Gating</a>
+      <a href="#governance">Governance</a>
+      <a href="#forms">Forms & Data</a>
+      <a href="#documents">Document Dependency Model</a>
+      <a href="#integration">Integration with Document Platform</a>
+      <a href="#visibility">Operational Visibility</a>
+      <a href="#security">Security & Access</a>
+      <a href="#deliverables">Consultant Deliverables</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav style="margin-bottom: 28px; font-size: 12px">
+    <a href="index.html" style="color: #67b7ff; text-decoration: none"
+      >← Back to Overview</a
+    >
+  </nav>
+
+<section id="overview">
+  <h2>1. Overview (Plain English)</h2>
+  <p>
+    The purpose of this implementation is to use <strong>Zoho CRM</strong> and <strong>Zoho Creator</strong> together
+    to manage a complete onboarding and operational lifecycle — from first contact through to active operation —
+    with <strong>clear rules, visibility, and accountability</strong>.
+  </p>
+
+  <div class="callout">
+    <strong>Important framing:</strong><br/>
+    Zoho is the <strong>orchestration and governance layer</strong>.<br/>
+    It decides <em>what can move forward, when, and why</em>.
+  </div>
+
+  <p>
+    Document intelligence (OCR, validation, classification) is handled by an external document system.
+    Zoho consumes the results and enforces progression rules.
+  </p>
+</section>
+
+<section id="architecture">
+  <h2>2. High-Level Architecture</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>Responsibility</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Zoho CRM</strong></td>
+        <td>
+          Companies, deals, lifecycle stages, approvals, ownership, and commercial visibility.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Zoho Creator</strong></td>
+        <td>
+          Detailed onboarding workflows, forms, operational data, and learner-level records.
+        </td>
+      </tr>
+      <tr>
+        <td><strong>External Document Platform</strong></td>
+        <td>
+          Document ingestion, OCR, validation, and exception detection.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    Zoho CRM + Creator together form the <strong>system of record</strong>.<br/>
+    The document platform is a specialist subsystem that feeds results into Zoho.
+  </div>
+</section>
+
+<section id="lifecycle">
+  <h2>3. Lifecycle Stages & Hard Gating</h2>
+
+  <p>
+    The consultant must implement <strong>hard-gated lifecycle stages</strong>.
+    Records may not progress unless specific conditions are met.
+  </p>
+
+  <h3>Minimum required stages</h3>
+  <ol>
+    <li>In Contact</li>
+    <li>NDA Signed</li>
+    <li>Documents Submitted</li>
+    <li>Vetting Approved</li>
+    <li>SLA Signed</li>
+    <li>Onboarding (Finance + Ops)</li>
+    <li>Active</li>
+  </ol>
+
+  <div class="callout">
+    <strong>Key expectation:</strong><br/>
+    Stage changes should be <em>rule-driven by default</em>, not manual.
+  </div>
+</section>
+
+<section id="governance">
+  <h2>4. Governance & Controls</h2>
+
+  <p>Zoho must enforce:</p>
+  <ul>
+    <li>Mandatory fields per stage</li>
+    <li>Required document signals from the document platform</li>
+    <li>Explicit approvals where exceptions are allowed</li>
+  </ul>
+
+  <h3>Overrides</h3>
+  <p>
+    Overrides must:
+  </p>
+  <ul>
+    <li>Be intentional (no silent bypassing)</li>
+    <li>Record who approved</li>
+    <li>Require a reason</li>
+    <li>Be auditable later</li>
+  </ul>
+</section>
+
+<section id="forms">
+  <h2>5. Forms & Data Capture</h2>
+
+  <p>
+    Zoho Creator will be used to build <strong>progressive, saveable forms</strong>
+    for onboarding and operations.
+  </p>
+
+  <ul>
+    <li>Application forms</li>
+    <li>Finance onboarding</li>
+    <li>Operational onboarding</li>
+  </ul>
+
+  <h3>Form expectations</h3>
+  <ul>
+    <li>Users can save and return later</li>
+    <li>Clear progress indicators</li>
+    <li>Contextual guidance where confusion is likely</li>
+  </ul>
+</section>
+
+<section id="documents">
+  <h2>6. Document Dependency Model</h2>
+
+  <p>
+    Zoho does <strong>not</strong> store documents, but it must understand:
+  </p>
+  <ul>
+    <li>Which documents are required</li>
+    <li>For whom (company vs individual)</li>
+    <li>At which stage</li>
+    <li>Whether requirements are satisfied</li>
+  </ul>
+
+  <div class="callout">
+    <strong>Think of Zoho as the rulebook:</strong><br/>
+    It knows what is required and blocks progress when requirements are unmet.
+  </div>
+</section>
+
+<section id="integration">
+  <h2>7. Integration with the Document Platform</h2>
+
+  <p>
+    The consultant must design a <strong>clean, vendor-agnostic integration contract</strong>.
+  </p>
+
+  <h3>What Zoho sends</h3>
+  <ul>
+    <li>Entity identifiers (company, person)</li>
+    <li>Required document matrix</li>
+    <li>Lifecycle context</li>
+  </ul>
+
+  <h3>What Zoho receives</h3>
+  <ul>
+    <li>Document status per person</li>
+    <li>Exception flags</li>
+    <li>Completion signals (“gate satisfied”)</li>
+  </ul>
+
+  <div class="callout">
+    Zoho must remain flexible — the integration should not be hardcoded to a single document vendor unless explicitly agreed.
+  </div>
+</section>
+
+<section id="visibility">
+  <h2>8. Operational Visibility</h2>
+
+  <p>
+    The implementation must provide dashboards showing:
+  </p>
+  <ul>
+    <li>Applications stuck at each stage</li>
+    <li>Common document failure points</li>
+    <li>SLA breaches</li>
+    <li>Pipeline volume and projections</li>
+  </ul>
+
+  <p class="muted">
+    These views are for operations and management, not just sales.
+  </p>
+</section>
+
+<section id="security">
+  <h2>9. Security & Access</h2>
+
+  <ul>
+    <li>Role-based access (Sales, Vetting, Finance, Ops)</li>
+    <li>Clear ownership of records</li>
+    <li>No shared accounts</li>
+    <li>Full activity history per record</li>
+  </ul>
+</section>
+
+<section id="deliverables">
+  <h2>10. Required Consultant Deliverables</h2>
+
+  <ol>
+    <li>High-level data model (entities and relationships)</li>
+    <li>Lifecycle and gating diagram</li>
+    <li>Integration contract definition</li>
+    <li>Governance rules and override logic</li>
+    <li>Admin documentation</li>
+    <li>Handover and training</li>
+  </ol>
+
+  <div class="callout">
+    The goal is not just a working system — it must be <strong>understandable, supportable, and governable</strong>.
+  </div>
+</section>
+
+<footer>
+  <div>
+    <strong>Cross-reference:</strong> This specification is designed to work alongside the External Document Platform spec.
+  </div>
+  <div>
+    Zoho = orchestration, governance, and system of record.
+  </div>
+</footer>
+
+</main>
+</body>
+</html>
